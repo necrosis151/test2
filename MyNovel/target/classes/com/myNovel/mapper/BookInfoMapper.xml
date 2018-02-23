@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myNovel.dao.BookInfoDao">
+
+	<cache></cache>
+	<resultMap id="BaseResultMap" type="com.myNovel.model.BookInfo">
+		<id column="idbookinfo" jdbcType="INTEGER" property="idbookinfo" />
+		<result column="bookname" jdbcType="VARCHAR" property="bookname" />
+		<result column="bookmessage" jdbcType="VARCHAR" property="bookmessage" />
+		<result column="updatetime" jdbcType="VARCHAR" property="updatetime" />
+		<result column="uploaduser" jdbcType="INTEGER" property="uploaduser" />
+		<association property="user" javaType="com.myNovel.model.User">
+			<id column="id" jdbcType="INTEGER" property="id" />
+			<result column="username" jdbcType="VARCHAR" property="username" />
+			<result column="password" jdbcType="VARCHAR" property="password" />
+			<result column="faceimage" jdbcType="VARCHAR" property="faceimage" />
+		</association>
+		<collection property="types" ofType="com.myNovel.model.Types">
+			<id column="idtypes" jdbcType="INTEGER" property="idtypes" />
+			<result column="type" jdbcType="VARCHAR" property="type" />
+		</collection>
+	</resultMap>
+	<sql id="Base_Column_List">
+		idbookinfo, bookname, bookmessage, updatetime, uploaduser
+	</sql>
+	<select id="selectBookInfoByType" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		b.idbookinfo,b.bookname,b.bookmessage,b.updatetime,b.uploaduser,u.id,u.username,u.password,u.faceimage,tl.idbook,tl.idtype
+		from bookinfo b inner join mynovel.typelist tl on
+		b.idbookinfo=tl.idbook inner join mynovel.types t on
+		tl.idtype=t.idtypes
+		inner join mynovel.users u on b.uploaduser=u.id
+		where t.type =
+		#{type,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAllBookInfo" resultMap="BaseResultMap">
+		select * from bookinfo b inner join mynovel.typelist tl on
+		b.idbookinfo=tl.idbook inner join mynovel.types t on
+		tl.idtype=t.idtypes
+		inner join mynovel.users u on b.uploaduser=u.id
+	</select>
+	<select id="selectBookInfoByUserId" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		b.idbookinfo,b.bookname,b.bookmessage,b.updatetime,b.uploaduser,u.id,u.username,u.password,u.faceimage,t.idtypes,t.type
+		from bookinfo b inner join mynovel.typelist tl on
+		b.idbookinfo=tl.idbook inner join mynovel.types t on
+		tl.idtype=t.idtypes
+		inner join mynovel.users u on b.uploaduser=u.id
+		where b.uploaduser=
+		#{userid,jdbcType=INTEGER}
+	</select>
+	<insert id="insertBookInfo" parameterType="com.myNovel.model.BookInfo"
+		useGeneratedKeys="true" keyProperty="idbookinfo">
+		insert into bookinfo
+		(bookname,bookmessage,updatetime,uploaduser)
+		values
+		(#{bookname,jdbcType=VARCHAR},
+		#{bookmessage,jdbcType=VARCHAR},
+		#{updatetime,jdbcType=VARCHAR},
+		#{uploaduser,jdbcType=INTEGER})
+	</insert>
+	<!-- <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap"> 
+		select <include refid="Base_Column_List" /> from bookinfo where idbookinfo 
+		= #{idbookinfo,jdbcType=INTEGER} </select> <delete id="deleteByPrimaryKey" 
+		parameterType="java.lang.Integer"> delete from bookinfo where idbookinfo 
+		= #{idbookinfo,jdbcType=INTEGER} </delete> <insert id="insertSelective" parameterType="com.myNovel.model.BookInfo"> 
+		insert into bookinfo <trim prefix="(" suffix=")" suffixOverrides=","> <if 
+		test="idbookinfo != null"> idbookinfo, </if> <if test="bookname != null"> 
+		bookname, </if> <if test="bookmessage != null"> bookmessage, </if> <if test="updatetime 
+		!= null"> updatetime, </if> <if test="uploaduser != null"> uploaduser, </if> 
+		</trim> <trim prefix="values (" suffix=")" suffixOverrides=","> <if test="idbookinfo 
+		!= null"> #{idbookinfo,jdbcType=INTEGER}, </if> <if test="bookname != null"> 
+		#{bookname,jdbcType=VARCHAR}, </if> <if test="bookmessage != null"> #{bookmessage,jdbcType=VARCHAR}, 
+		</if> <if test="updatetime != null"> #{updatetime,jdbcType=VARCHAR}, </if> 
+		<if test="uploaduser != null"> #{uploaduser,jdbcType=INTEGER}, </if> </trim> 
+		</insert> <update id="updateByPrimaryKeySelective" parameterType="com.myNovel.model.BookInfo"> 
+		update bookinfo <set> <if test="bookname != null"> bookname = #{bookname,jdbcType=VARCHAR}, 
+		</if> <if test="bookmessage != null"> bookmessage = #{bookmessage,jdbcType=VARCHAR}, 
+		</if> <if test="updatetime != null"> updatetime = #{updatetime,jdbcType=VARCHAR}, 
+		</if> <if test="uploaduser != null"> uploaduser = #{uploaduser,jdbcType=INTEGER}, 
+		</if> </set> where idbookinfo = #{idbookinfo,jdbcType=INTEGER} </update> 
+		<update id="updateByPrimaryKey" parameterType="com.myNovel.model.BookInfo"> 
+		update bookinfo set bookname = #{bookname,jdbcType=VARCHAR}, bookmessage 
+		= #{bookmessage,jdbcType=VARCHAR}, updatetime = #{updatetime,jdbcType=VARCHAR}, 
+		uploaduser = #{uploaduser,jdbcType=INTEGER} where idbookinfo = #{idbookinfo,jdbcType=INTEGER} 
+		</update> -->
+
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myNovel.dao.TypeListDao">
+  <resultMap id="BaseResultMap" type="com.myNovel.model.TypeList">
+    <id column="idtypelist" jdbcType="INTEGER" property="idtypelist" />
+    <result column="idbook" jdbcType="INTEGER" property="idbook" />
+    <result column="idtype" jdbcType="INTEGER" property="idtype" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    idtypelist, idbook, idtype
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from typelist
+    where idtypelist = #{idtypelist,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from typelist
+    where idtypelist = #{idtypelist,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.myNovel.model.TypeList">
+    insert into typelist (idtypelist, idbook, idtype
+      )
+    values (#{idtypelist,jdbcType=INTEGER}, #{idbook,jdbcType=INTEGER}, #{idtype,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myNovel.model.TypeList">
+    insert into typelist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idtypelist != null">
+        idtypelist,
+      </if>
+      <if test="idbook != null">
+        idbook,
+      </if>
+      <if test="idtype != null">
+        idtype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idtypelist != null">
+        #{idtypelist,jdbcType=INTEGER},
+      </if>
+      <if test="idbook != null">
+        #{idbook,jdbcType=INTEGER},
+      </if>
+      <if test="idtype != null">
+        #{idtype,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myNovel.model.TypeList">
+    update typelist
+    <set>
+      <if test="idbook != null">
+        idbook = #{idbook,jdbcType=INTEGER},
+      </if>
+      <if test="idtype != null">
+        idtype = #{idtype,jdbcType=INTEGER},
+      </if>
+    </set>
+    where idtypelist = #{idtypelist,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myNovel.model.TypeList">
+    update typelist
+    set idbook = #{idbook,jdbcType=INTEGER},
+      idtype = #{idtype,jdbcType=INTEGER}
+    where idtypelist = #{idtypelist,jdbcType=INTEGER}
+  </update>
+</mapper>

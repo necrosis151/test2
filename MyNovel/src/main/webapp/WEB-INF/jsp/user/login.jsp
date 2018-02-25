@@ -24,7 +24,7 @@
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	function changeCode() {
-		$("#Img").attr("src", "ajax?t=" + genTimestamp());
+		$("#Img").attr("src", "ajax/check?t=" + genTimestamp());
 	}
 	function genTimestamp() {
 		var time = new Date();

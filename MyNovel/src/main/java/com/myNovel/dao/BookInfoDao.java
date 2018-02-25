@@ -21,5 +21,7 @@ public interface BookInfoDao {
 	
 	List<BookInfo> selectBookInfoByUserId(int userid);
 	
-	List<BookInfo> selectAllBookInfo();
+	List<Integer> selectBookidByPage(int BeginNum,int pageSize);
+	
+	List<BookInfo> selectBookInfosByPage(List<Integer> idlist);
 }

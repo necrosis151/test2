@@ -20,6 +20,8 @@
 			<result column="type" jdbcType="VARCHAR" property="type" />
 		</collection>
 	</resultMap>
+	<!-- <resultMap type="com.myNovel.model.BookInfo" id="pageidlist"> <id column="idbookinfo" 
+		jdbcType="INTEGER" property="idbookinfo" /> </resultMap> -->
 	<sql id="Base_Column_List">
 		idbookinfo, bookname, bookmessage, updatetime, uploaduser
 	</sql>
@@ -34,11 +36,24 @@
 		where t.type =
 		#{type,jdbcType=VARCHAR}
 	</select>
-	<select id="selectAllBookInfo" resultMap="BaseResultMap">
-		select * from bookinfo b inner join mynovel.typelist tl on
+	<select id="selectBookidByPage" resultType="java.lang.Integer">
+		select
+		bookinfo.idbookinfo from
+		bookinfo limit #{0},#{1}
+	</select>
+
+	<select id="selectBookInfosByPage" resultMap="BaseResultMap">
+		select
+		b.idbookinfo,b.bookname,b.bookmessage,b.updatetime,b.uploaduser,u.id,u.username,u.password,u.faceimage,tl.idbook,tl.idtype
+		from bookinfo b inner join mynovel.typelist tl on
 		b.idbookinfo=tl.idbook inner join mynovel.types t on
 		tl.idtype=t.idtypes
 		inner join mynovel.users u on b.uploaduser=u.id
+		where b.idbookinfo in
+		<foreach collection="list" item="id" open="(" close=")"
+			separator=",">
+			#{id}
+		</foreach>
 	</select>
 	<select id="selectBookInfoByUserId" parameterType="java.lang.Integer"
 		resultMap="BaseResultMap">

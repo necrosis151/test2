@@ -33,9 +33,9 @@ public class CaptchaUtil {
 				BufferedImage.TYPE_INT_RGB);
 		Graphics g = bi.getGraphics();
 		g.setColor(new Color(100, 230, 200));
-		g.fillRect(0, 0, 100, 30);
+		g.fillRect(0, 0, IMG_HEIGHT, IMG_WIDTH);
 
-		char[] codeChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456"
+		char[] codeChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 				.toCharArray();
 		String captcha = ""; // 存放生成的验证码
 		Random random = new Random();

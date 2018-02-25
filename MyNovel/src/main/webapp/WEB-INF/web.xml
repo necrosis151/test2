@@ -5,11 +5,22 @@
     version="3.0">    
     <display-name>Archetype Created Web Application</display-name>        
         
-    <!-- 加载spring bean -->    
+    <!--mybatis和redis配置-->   
     <context-param>    
          <param-name>contextConfigLocation</param-name>    
-        <param-value>classpath:Mybatis-spring.xml</param-value>    
+        <param-value>classpath:Mybatis-spring.xml,classpath:spring-redis.xml</param-value>    
     </context-param>    
+    <!--log4j日志-->
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:log4j.properties</param-value>
+    </context-param>
+    <listener>
+        <listener-class>
+            org.springframework.web.util.Log4jConfigListener
+        </listener-class>
+    </listener>
+    
     <listener>    
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>    
     </listener>    

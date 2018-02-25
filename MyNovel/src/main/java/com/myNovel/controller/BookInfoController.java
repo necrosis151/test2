@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import util.NumUtil;
+
+import com.github.pagehelper.PageHelper;
 import com.google.gson.Gson;
 import com.myNovel.model.BookContents;
 import com.myNovel.model.BookInfo;
@@ -90,21 +93,18 @@ public class BookInfoController {
 
 	@RequestMapping("/getcontent{bookid}")
 	public String magMainList(@PathVariable int bookid, Model model) {
-//		BookInfo bookInfo = bookInfoServerImpl.getBookInfo(bookid);
+
 		List<BookContents> bookContents = bookContentServerimpl
 				.getBookContentsByBookID(bookid);
+	
 		model.addAttribute("bookContents", bookContents);
-//		model.addAttribute("bookinfo", bookInfo);
+
 		return "book/clist";
 	}
 
 	@RequestMapping("/novelList")
 	public String showBook(Model model){
-	
-		String json=new Gson().toJson(bookInfoServerImpl.getAllBookInfo());
-		System.out.println(json);
-		model.addAttribute("books",json);
-		
+//		
 		return "book/novelList";
 	}
 	

@@ -98,7 +98,7 @@
 			data : JSON.stringify(json),
 			dataType : 'json',
 			success : function(data) {
-				alert(JSON.stringify(data));
+				alert(JSON.stringify(data.username));
 			}
 
 		});

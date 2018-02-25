@@ -1,218 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.myNovel.dao.BookContentsDao">
-  <resultMap id="BaseResultMap" type="com.myNovel.model.BookContents">
-    <id column="idbookcontents" jdbcType="INTEGER" property="idbookcontents" />
-    <result column="chapter" jdbcType="INTEGER" property="chapter" />
-    <result column="chaptername" jdbcType="VARCHAR" property="chaptername" />
-    <result column="adress" jdbcType="VARCHAR" property="adress" />
-    <result column="bookid" jdbcType="INTEGER" property="bookid" />
-    <result column="userid" jdbcType="INTEGER" property="userid" />
-    <result column="updatetime" jdbcType="VARCHAR" property="updatetime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    idbookcontents, chapter, chaptername, adress, bookid, userid, updatetime
-  </sql>
-  
-  <select id="selectByBookInfoID" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from bookcontents
-    where bookid = #{bookid,jdbcType=INTEGER}
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from bookcontents
-    where idbookcontents = #{idbookcontents,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from bookcontents
-    where idbookcontents = #{idbookcontents,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.myNovel.model.BookContents">
-    insert into bookcontents (idbookcontents, chapter, chaptername, 
-      adress, bookid, userid, 
-      updatetime)
-    values (#{idbookcontents,jdbcType=INTEGER}, #{chapter,jdbcType=INTEGER}, #{chaptername,jdbcType=VARCHAR}, 
-      #{adress,jdbcType=VARCHAR}, #{bookid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
-      #{updatetime,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.myNovel.model.BookContents">
-    insert into bookcontents
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="idbookcontents != null">
-        idbookcontents,
-      </if>
-      <if test="chapter != null">
-        chapter,
-      </if>
-      <if test="chaptername != null">
-        chaptername,
-      </if>
-      <if test="adress != null">
-        adress,
-      </if>
-      <if test="bookid != null">
-        bookid,
-      </if>
-      <if test="userid != null">
-        userid,
-      </if>
-      <if test="updatetime != null">
-        updatetime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="idbookcontents != null">
-        #{idbookcontents,jdbcType=INTEGER},
-      </if>
-      <if test="chapter != null">
-        #{chapter,jdbcType=INTEGER},
-      </if>
-      <if test="chaptername != null">
-        #{chaptername,jdbcType=VARCHAR},
-      </if>
-      <if test="adress != null">
-        #{adress,jdbcType=VARCHAR},
-      </if>
-      <if test="bookid != null">
-        #{bookid,jdbcType=INTEGER},
-      </if>
-      <if test="userid != null">
-        #{userid,jdbcType=INTEGER},
-      </if>
-      <if test="updatetime != null">
-        #{updatetime,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.myNovel.model.BookContents">
-    update bookcontents
-    <set>
-      <if test="chapter != null">
-        chapter = #{chapter,jdbcType=INTEGER},
-      </if>
-      <if test="chaptername != null">
-        chaptername = #{chaptername,jdbcType=VARCHAR},
-      </if>
-      <if test="adress != null">
-        adress = #{adress,jdbcType=VARCHAR},
-      </if>
-      <if test="bookid != null">
-        bookid = #{bookid,jdbcType=INTEGER},
-      </if>
-      <if test="userid != null">
-        userid = #{userid,jdbcType=INTEGER},
-      </if>
-      <if test="updatetime != null">
-        updatetime = #{updatetime,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where idbookcontents = #{idbookcontents,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.myNovel.model.BookContents">
-    update bookcontents
-    set chapter = #{chapter,jdbcType=INTEGER},
-      chaptername = #{chaptername,jdbcType=VARCHAR},
-      adress = #{adress,jdbcType=VARCHAR},
-      bookid = #{bookid,jdbcType=INTEGER},
-      userid = #{userid,jdbcType=INTEGER},
-      updatetime = #{updatetime,jdbcType=VARCHAR}
-    where idbookcontents = #{idbookcontents,jdbcType=INTEGER}
-  </update>
-	
-	<!-- 
-	&lt;select id="selectByPrimaryKey" parameterType="java.lang.Integer"
-		resultMap="BaseResultMap"&gt;
+	<resultMap id="BaseResultMap" type="com.myNovel.model.BookContents">
+		<id column="idbookcontents" jdbcType="INTEGER" property="idbookcontents" />
+		<result column="chapter" jdbcType="INTEGER" property="chapter" />
+		<result column="chaptername" jdbcType="VARCHAR" property="chaptername" />
+		<result column="adress" jdbcType="VARCHAR" property="adress" />
+		<result column="bookid" jdbcType="INTEGER" property="bookid" />
+		<result column="userid" jdbcType="INTEGER" property="userid" />
+		<result column="updatetime" jdbcType="VARCHAR" property="updatetime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		idbookcontents, chapter, chaptername, adress, bookid,
+		userid, updatetime
+	</sql>
+
+	<select id="selectByBookInfoID" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
 		select
-		&lt;include refid="Base_Column_List" /&gt;
+		<include refid="Base_Column_List" />
+		from bookcontents
+		where bookid = #{bookid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
 		from bookcontents
 		where idbookcontents =
 		#{idbookcontents,jdbcType=INTEGER}
-	&lt;/select&gt;
-	&lt;delete id="deleteByPrimaryKey" parameterType="java.lang.Integer"&gt;
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
 		bookcontents
 		where idbookcontents = #{idbookcontents,jdbcType=INTEGER}
-	&lt;/delete&gt;
-	&lt;insert id="insert" parameterType="com.myNovel.model.BookContents"&gt;
-		insert into bookcontents
-		(idbookcontents, chapter, chaptername,
-		adress, bookid, userid
-		)
+	</delete>
+	<insert id="insert" parameterType="com.myNovel.model.BookContents">
+		insert into bookcontents (idbookcontents, chapter, chaptername,
+		adress, bookid, userid,
+		updatetime)
 		values
-		(#{idbookcontents,jdbcType=INTEGER}, #{chapter,jdbcType=INTEGER},
-		#{chaptername,jdbcType=VARCHAR},
-		#{adress,jdbcType=VARCHAR},
-		#{bookid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}
-		)
-	&lt;/insert&gt;
-	&lt;insert id="insertSelective" parameterType="com.myNovel.model.BookContents"&gt;
+		<if test="list!=null">
+			<foreach collection="list" item="bc" index="idx"  separator=","></foreach>
+			(#{bc.idbookcontents,jdbcType=INTEGER},
+			#{idx},
+			#{bc.chaptername,jdbcType=VARCHAR},#{bc.adress,jdbcType=VARCHAR},
+			#{bc.bookid,jdbcType=INTEGER},
+			#{bc.userid,jdbcType=INTEGER},
+			#{bc.updatetime,jdbcType=VARCHAR})
+
+		</if>
+	</insert>
+	<insert id="insertSelective" parameterType="com.myNovel.model.BookContents">
 		insert into bookcontents
-		&lt;trim prefix="(" suffix=")" suffixOverrides=","&gt;
-			&lt;if test="idbookcontents != null"&gt;
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="idbookcontents != null">
 				idbookcontents,
-			&lt;/if&gt;
-			&lt;if test="chapter != null"&gt;
+			</if>
+			<if test="chapter != null">
 				chapter,
-			&lt;/if&gt;
-			&lt;if test="chaptername != null"&gt;
+			</if>
+			<if test="chaptername != null">
 				chaptername,
-			&lt;/if&gt;
-			&lt;if test="adress != null"&gt;
+			</if>
+			<if test="adress != null">
 				adress,
-			&lt;/if&gt;
-			&lt;if test="bookid != null"&gt;
+			</if>
+			<if test="bookid != null">
 				bookid,
-			&lt;/if&gt;
-			&lt;if test="userid != null"&gt;
+			</if>
+			<if test="userid != null">
 				userid,
-			&lt;/if&gt;
-		&lt;/trim&gt;
-		&lt;trim prefix="values (" suffix=")" suffixOverrides=","&gt;
-			&lt;if test="idbookcontents != null"&gt;
+			</if>
+			<if test="updatetime != null">
+				updatetime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="idbookcontents != null">
 				#{idbookcontents,jdbcType=INTEGER},
-			&lt;/if&gt;
-			&lt;if test="chapter != null"&gt;
+			</if>
+			<if test="chapter != null">
 				#{chapter,jdbcType=INTEGER},
-			&lt;/if&gt;
-			&lt;if test="chaptername != null"&gt;
+			</if>
+			<if test="chaptername != null">
 				#{chaptername,jdbcType=VARCHAR},
-			&lt;/if&gt;
-			&lt;if test="adress != null"&gt;
+			</if>
+			<if test="adress != null">
 				#{adress,jdbcType=VARCHAR},
-			&lt;/if&gt;
-			&lt;if test="bookid != null"&gt;
+			</if>
+			<if test="bookid != null">
 				#{bookid,jdbcType=INTEGER},
-			&lt;/if&gt;
-			&lt;if test="userid != null"&gt;
+			</if>
+			<if test="userid != null">
 				#{userid,jdbcType=INTEGER},
-			&lt;/if&gt;
-		&lt;/trim&gt;
-	&lt;/insert&gt;
-	&lt;update id="updateByPrimaryKeySelective" parameterType="com.myNovel.model.BookContents"&gt;
+			</if>
+			<if test="updatetime != null">
+				#{updatetime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.myNovel.model.BookContents">
 		update bookcontents
-		&lt;set&gt;
-			&lt;if test="chapter != null"&gt;
+		<set>
+			<if test="chapter != null">
 				chapter = #{chapter,jdbcType=INTEGER},
-			&lt;/if&gt;
-			&lt;if test="chaptername != null"&gt;
+			</if>
+			<if test="chaptername != null">
 				chaptername = #{chaptername,jdbcType=VARCHAR},
-			&lt;/if&gt;
-			&lt;if test="adress != null"&gt;
+			</if>
+			<if test="adress != null">
 				adress = #{adress,jdbcType=VARCHAR},
-			&lt;/if&gt;
-			&lt;if test="bookid != null"&gt;
+			</if>
+			<if test="bookid != null">
 				bookid = #{bookid,jdbcType=INTEGER},
-			&lt;/if&gt;
-			&lt;if test="userid != null"&gt;
+			</if>
+			<if test="userid != null">
 				userid = #{userid,jdbcType=INTEGER},
-			&lt;/if&gt;
-		&lt;/set&gt;
+			</if>
+			<if test="updatetime != null">
+				updatetime = #{updatetime,jdbcType=VARCHAR},
+			</if>
+		</set>
 		where idbookcontents = #{idbookcontents,jdbcType=INTEGER}
-	&lt;/update&gt;
-	&lt;update id="updateByPrimaryKey" parameterType="com.myNovel.model.BookContents"&gt;
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.myNovel.model.BookContents">
 		update
 		bookcontents
 		set chapter = #{chapter,jdbcType=INTEGER},
@@ -221,117 +133,87 @@
 		adress = #{adress,jdbcType=VARCHAR},
 		bookid = #{bookid,jdbcType=INTEGER},
 		userid =
-		#{userid,jdbcType=INTEGER}
-		where idbookcontents =
-		#{idbookcontents,jdbcType=INTEGER}
-	&lt;/update&gt;
-	&lt;resultMap id="BaseResultMap" type="com.myNovel.model.BookContents"&gt;
-		&lt;id column="idbookcontent" jdbcType="INTEGER" property="idbookcontent" /&gt;
-		&lt;result column="chapter" jdbcType="INTEGER" property="chapter" /&gt;
-		&lt;result column="chaptername" jdbcType="VARCHAR" property="chaptername" /&gt;
-		&lt;result column="adress" jdbcType="VARCHAR" property="adress" /&gt;
-		&lt;result column="bookid" jdbcType="INTEGER" property="bookid" /&gt;
-	&lt;/resultMap&gt;
-	&lt;sql id="Base_Column_List"&gt;
-		idbookcontent, chapter, chaptername, adress, bookid
-	&lt;/sql&gt;
+		#{userid,jdbcType=INTEGER},
+		updatetime = #{updatetime,jdbcType=VARCHAR}
+		where idbookcontents = #{idbookcontents,jdbcType=INTEGER}
+	</update>
 
-	&lt;select id="selectByBookInfoID" parameterType="java.lang.Integer"
-		resultMap="BaseResultMap"&gt;
-		select
-		&lt;include refid="Base_Column_List" /&gt;
-		from bookcontents
-		where bookid =
-		#{bookid,jdbcType=INTEGER}
-	&lt;/select&gt;
-	&lt;select id="selectByPrimaryKey" parameterType="java.lang.Integer"
-		resultMap="BaseResultMap"&gt;
-		select
-		&lt;include refid="Base_Column_List" /&gt;
-		from bookcontents
-		where idbookcontent =
-		#{idbookcontent,jdbcType=INTEGER}
-	&lt;/select&gt;
-	&lt;delete id="deleteByPrimaryKey" parameterType="java.lang.Integer"&gt;
-		delete from
-		bookcontents
-		where idbookcontent = #{idbookcontent,jdbcType=INTEGER}
-	&lt;/delete&gt;
-	&lt;insert id="insert" parameterType="com.myNovel.model.BookContents"&gt;
-		insert into bookcontents
-		(idbookcontent, chapter, chaptername,
-		adress, bookid)
-		values
-		(#{idbookcontent,jdbcType=INTEGER}, #{chapter,jdbcType=INTEGER},
-		#{chaptername,jdbcType=VARCHAR},
-		#{adress,jdbcType=VARCHAR},
-		#{bookid,jdbcType=INTEGER})
-	&lt;/insert&gt;
-	&lt;insert id="insertSelective" parameterType="com.myNovel.model.BookContents"&gt;
-		insert into bookcontents
-		&lt;trim prefix="(" suffix=")" suffixOverrides=","&gt;
-			&lt;if test="idbookcontent != null"&gt;
-				idbookcontent,
-			&lt;/if&gt;
-			&lt;if test="chapter != null"&gt;
-				chapter,
-			&lt;/if&gt;
-			&lt;if test="chaptername != null"&gt;
-				chaptername,
-			&lt;/if&gt;
-			&lt;if test="adress != null"&gt;
-				adress,
-			&lt;/if&gt;
-			&lt;if test="bookid != null"&gt;
-				bookid,
-			&lt;/if&gt;
-		&lt;/trim&gt;
-		&lt;trim prefix="values (" suffix=")" suffixOverrides=","&gt;
-			&lt;if test="idbookcontent != null"&gt;
-				#{idbookcontent,jdbcType=INTEGER},
-			&lt;/if&gt;
-			&lt;if test="chapter != null"&gt;
-				#{chapter,jdbcType=INTEGER},
-			&lt;/if&gt;
-			&lt;if test="chaptername != null"&gt;
-				#{chaptername,jdbcType=VARCHAR},
-			&lt;/if&gt;
-			&lt;if test="adress != null"&gt;
-				#{adress,jdbcType=VARCHAR},
-			&lt;/if&gt;
-			&lt;if test="bookid != null"&gt;
-				#{bookid,jdbcType=INTEGER},
-			&lt;/if&gt;
-		&lt;/trim&gt;
-	&lt;/insert&gt;
-	&lt;update id="updateByPrimaryKeySelective" parameterType="com.myNovel.model.BookContents"&gt;
-		update bookcontents
-		&lt;set&gt;
-			&lt;if test="chapter != null"&gt;
-				chapter = #{chapter,jdbcType=INTEGER},
-			&lt;/if&gt;
-			&lt;if test="chaptername != null"&gt;
-				chaptername = #{chaptername,jdbcType=VARCHAR},
-			&lt;/if&gt;
-			&lt;if test="adress != null"&gt;
-				adress = #{adress,jdbcType=VARCHAR},
-			&lt;/if&gt;
-			&lt;if test="bookid != null"&gt;
-				bookid = #{bookid,jdbcType=INTEGER},
-			&lt;/if&gt;
-		&lt;/set&gt;
-		where idbookcontent = #{idbookcontent,jdbcType=INTEGER}
-	&lt;/update&gt;
-	&lt;update id="updateByPrimaryKey" parameterType="com.myNovel.model.BookContents"&gt;
-		update
-		bookcontents
-		set chapter = #{chapter,jdbcType=INTEGER},
-		chaptername =
-		#{chaptername,jdbcType=VARCHAR},
-		adress = #{adress,jdbcType=VARCHAR},
-		bookid = #{bookid,jdbcType=INTEGER}
-		where idbookcontent =
-		#{idbookcontent,jdbcType=INTEGER}
-	&lt;/update&gt;
-	 -->
+	<!-- &lt;select id="selectByPrimaryKey" parameterType="java.lang.Integer" 
+		resultMap="BaseResultMap"&gt; select &lt;include refid="Base_Column_List" 
+		/&gt; from bookcontents where idbookcontents = #{idbookcontents,jdbcType=INTEGER} 
+		&lt;/select&gt; &lt;delete id="deleteByPrimaryKey" parameterType="java.lang.Integer"&gt; 
+		delete from bookcontents where idbookcontents = #{idbookcontents,jdbcType=INTEGER} 
+		&lt;/delete&gt; &lt;insert id="insert" parameterType="com.myNovel.model.BookContents"&gt; 
+		insert into bookcontents (idbookcontents, chapter, chaptername, adress, bookid, 
+		userid ) values (#{idbookcontents,jdbcType=INTEGER}, #{chapter,jdbcType=INTEGER}, 
+		#{chaptername,jdbcType=VARCHAR}, #{adress,jdbcType=VARCHAR}, #{bookid,jdbcType=INTEGER}, 
+		#{userid,jdbcType=INTEGER} ) &lt;/insert&gt; &lt;insert id="insertSelective" 
+		parameterType="com.myNovel.model.BookContents"&gt; insert into bookcontents 
+		&lt;trim prefix="(" suffix=")" suffixOverrides=","&gt; &lt;if test="idbookcontents 
+		!= null"&gt; idbookcontents, &lt;/if&gt; &lt;if test="chapter != null"&gt; 
+		chapter, &lt;/if&gt; &lt;if test="chaptername != null"&gt; chaptername, &lt;/if&gt; 
+		&lt;if test="adress != null"&gt; adress, &lt;/if&gt; &lt;if test="bookid 
+		!= null"&gt; bookid, &lt;/if&gt; &lt;if test="userid != null"&gt; userid, 
+		&lt;/if&gt; &lt;/trim&gt; &lt;trim prefix="values (" suffix=")" suffixOverrides=","&gt; 
+		&lt;if test="idbookcontents != null"&gt; #{idbookcontents,jdbcType=INTEGER}, 
+		&lt;/if&gt; &lt;if test="chapter != null"&gt; #{chapter,jdbcType=INTEGER}, 
+		&lt;/if&gt; &lt;if test="chaptername != null"&gt; #{chaptername,jdbcType=VARCHAR}, 
+		&lt;/if&gt; &lt;if test="adress != null"&gt; #{adress,jdbcType=VARCHAR}, 
+		&lt;/if&gt; &lt;if test="bookid != null"&gt; #{bookid,jdbcType=INTEGER}, 
+		&lt;/if&gt; &lt;if test="userid != null"&gt; #{userid,jdbcType=INTEGER}, 
+		&lt;/if&gt; &lt;/trim&gt; &lt;/insert&gt; &lt;update id="updateByPrimaryKeySelective" 
+		parameterType="com.myNovel.model.BookContents"&gt; update bookcontents &lt;set&gt; 
+		&lt;if test="chapter != null"&gt; chapter = #{chapter,jdbcType=INTEGER}, 
+		&lt;/if&gt; &lt;if test="chaptername != null"&gt; chaptername = #{chaptername,jdbcType=VARCHAR}, 
+		&lt;/if&gt; &lt;if test="adress != null"&gt; adress = #{adress,jdbcType=VARCHAR}, 
+		&lt;/if&gt; &lt;if test="bookid != null"&gt; bookid = #{bookid,jdbcType=INTEGER}, 
+		&lt;/if&gt; &lt;if test="userid != null"&gt; userid = #{userid,jdbcType=INTEGER}, 
+		&lt;/if&gt; &lt;/set&gt; where idbookcontents = #{idbookcontents,jdbcType=INTEGER} 
+		&lt;/update&gt; &lt;update id="updateByPrimaryKey" parameterType="com.myNovel.model.BookContents"&gt; 
+		update bookcontents set chapter = #{chapter,jdbcType=INTEGER}, chaptername 
+		= #{chaptername,jdbcType=VARCHAR}, adress = #{adress,jdbcType=VARCHAR}, bookid 
+		= #{bookid,jdbcType=INTEGER}, userid = #{userid,jdbcType=INTEGER} where idbookcontents 
+		= #{idbookcontents,jdbcType=INTEGER} &lt;/update&gt; &lt;resultMap id="BaseResultMap" 
+		type="com.myNovel.model.BookContents"&gt; &lt;id column="idbookcontent" jdbcType="INTEGER" 
+		property="idbookcontent" /&gt; &lt;result column="chapter" jdbcType="INTEGER" 
+		property="chapter" /&gt; &lt;result column="chaptername" jdbcType="VARCHAR" 
+		property="chaptername" /&gt; &lt;result column="adress" jdbcType="VARCHAR" 
+		property="adress" /&gt; &lt;result column="bookid" jdbcType="INTEGER" property="bookid" 
+		/&gt; &lt;/resultMap&gt; &lt;sql id="Base_Column_List"&gt; idbookcontent, 
+		chapter, chaptername, adress, bookid &lt;/sql&gt; &lt;select id="selectByBookInfoID" 
+		parameterType="java.lang.Integer" resultMap="BaseResultMap"&gt; select &lt;include 
+		refid="Base_Column_List" /&gt; from bookcontents where bookid = #{bookid,jdbcType=INTEGER} 
+		&lt;/select&gt; &lt;select id="selectByPrimaryKey" parameterType="java.lang.Integer" 
+		resultMap="BaseResultMap"&gt; select &lt;include refid="Base_Column_List" 
+		/&gt; from bookcontents where idbookcontent = #{idbookcontent,jdbcType=INTEGER} 
+		&lt;/select&gt; &lt;delete id="deleteByPrimaryKey" parameterType="java.lang.Integer"&gt; 
+		delete from bookcontents where idbookcontent = #{idbookcontent,jdbcType=INTEGER} 
+		&lt;/delete&gt; &lt;insert id="insert" parameterType="com.myNovel.model.BookContents"&gt; 
+		insert into bookcontents (idbookcontent, chapter, chaptername, adress, bookid) 
+		values (#{idbookcontent,jdbcType=INTEGER}, #{chapter,jdbcType=INTEGER}, #{chaptername,jdbcType=VARCHAR}, 
+		#{adress,jdbcType=VARCHAR}, #{bookid,jdbcType=INTEGER}) &lt;/insert&gt; &lt;insert 
+		id="insertSelective" parameterType="com.myNovel.model.BookContents"&gt; insert 
+		into bookcontents &lt;trim prefix="(" suffix=")" suffixOverrides=","&gt; 
+		&lt;if test="idbookcontent != null"&gt; idbookcontent, &lt;/if&gt; &lt;if 
+		test="chapter != null"&gt; chapter, &lt;/if&gt; &lt;if test="chaptername 
+		!= null"&gt; chaptername, &lt;/if&gt; &lt;if test="adress != null"&gt; adress, 
+		&lt;/if&gt; &lt;if test="bookid != null"&gt; bookid, &lt;/if&gt; &lt;/trim&gt; 
+		&lt;trim prefix="values (" suffix=")" suffixOverrides=","&gt; &lt;if test="idbookcontent 
+		!= null"&gt; #{idbookcontent,jdbcType=INTEGER}, &lt;/if&gt; &lt;if test="chapter 
+		!= null"&gt; #{chapter,jdbcType=INTEGER}, &lt;/if&gt; &lt;if test="chaptername 
+		!= null"&gt; #{chaptername,jdbcType=VARCHAR}, &lt;/if&gt; &lt;if test="adress 
+		!= null"&gt; #{adress,jdbcType=VARCHAR}, &lt;/if&gt; &lt;if test="bookid 
+		!= null"&gt; #{bookid,jdbcType=INTEGER}, &lt;/if&gt; &lt;/trim&gt; &lt;/insert&gt; 
+		&lt;update id="updateByPrimaryKeySelective" parameterType="com.myNovel.model.BookContents"&gt; 
+		update bookcontents &lt;set&gt; &lt;if test="chapter != null"&gt; chapter 
+		= #{chapter,jdbcType=INTEGER}, &lt;/if&gt; &lt;if test="chaptername != null"&gt; 
+		chaptername = #{chaptername,jdbcType=VARCHAR}, &lt;/if&gt; &lt;if test="adress 
+		!= null"&gt; adress = #{adress,jdbcType=VARCHAR}, &lt;/if&gt; &lt;if test="bookid 
+		!= null"&gt; bookid = #{bookid,jdbcType=INTEGER}, &lt;/if&gt; &lt;/set&gt; 
+		where idbookcontent = #{idbookcontent,jdbcType=INTEGER} &lt;/update&gt; &lt;update 
+		id="updateByPrimaryKey" parameterType="com.myNovel.model.BookContents"&gt; 
+		update bookcontents set chapter = #{chapter,jdbcType=INTEGER}, chaptername 
+		= #{chaptername,jdbcType=VARCHAR}, adress = #{adress,jdbcType=VARCHAR}, bookid 
+		= #{bookid,jdbcType=INTEGER} where idbookcontent = #{idbookcontent,jdbcType=INTEGER} 
+		&lt;/update&gt; -->
 </mapper>

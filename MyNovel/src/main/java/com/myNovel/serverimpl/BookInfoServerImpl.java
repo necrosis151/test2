@@ -1,6 +1,7 @@
 package com.myNovel.serverimpl;
 
 import java.awt.print.Book;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -82,8 +83,15 @@ public class BookInfoServerImpl {
 		bookInfoDao.updateByPrimaryKey(bookInfo);
 	}
 
-	public List<BookInfo> getAllBookInfo() {
+	public List<BookInfo> getBookInfoByPage(int pageNum, int pageSize) {
+		List<Integer> idlist = new ArrayList<>();
+		int beginNum = 0;
+		if (pageNum > 1) {
+			beginNum = (pageNum - 1) * pageSize ;
+		}
 
-		return bookInfoDao.selectAllBookInfo();
+		idlist = bookInfoDao.selectBookidByPage(beginNum, pageSize);
+
+		return bookInfoDao.selectBookInfosByPage(idlist);
 	}
 }

@@ -33,5 +33,7 @@
 	<a href="book/novelList">书</a>
 	<hr>
 	<a href="gojsonTest">测试</a>
+	<hr>
+	<a href="redisTest">redis</a>
 </body>
 </html>

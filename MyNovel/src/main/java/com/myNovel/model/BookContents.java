@@ -15,14 +15,17 @@ public class BookContents {
 
 	private String updatetime;
 
-	public BookContents(Integer chapter, String chaptername, String adress,
-			Integer bookid, Integer userid, String updatetime) {
-		this.chapter=chapter;
-		this.chaptername=chaptername;
-		this.adress=adress;
-		this.bookid=bookid;
-		this.userid=userid;
-		this.updatetime=updatetime;
+	public BookContents(String chaptername, String adress, Integer bookid,
+			Integer userid, String updatetime) {
+		this.chaptername = chaptername;
+		this.adress = adress;
+		this.bookid = bookid;
+		this.userid = userid;
+		this.updatetime = updatetime;
+	}
+
+	public BookContents() {
+
 	}
 
 	public Integer getIdbookcontents() {

@@ -52,28 +52,34 @@ public class BookContentServerimpl {
 	public void addBookContent(String bookname, String bookmessage,
 			int[] typelists, MultipartFile[] files, HttpSession session,
 			String[] filenames) {
-		
+
 		ArrayList<String> filesadress = SaveTxtUtil.saveTxt(files, session);
+		List<BookContents> bclist = new ArrayList<>();
+
 		int userid = ((User) session.getAttribute("user")).getId();
 		int bookid = bookInfoServerImpl.addBookInfo(bookname, bookmessage,
 				typelists, userid);
-		System.out.println("----------------"+bookid+"-------------");
-//		Iterator<String> it=filesadress.iterator();
-		if (!(files.length==0)) {
+		System.out.println("----------------" + bookid + "-------------");
+		// Iterator<String> it=filesadress.iterator();
+		if (!(files.length == 0)) {
 			BookContents bookContents = null;
 			int chapter = 0;
-			for (int i = 0 ; i < files.length; i++) {
+			for (int i = 0; i < files.length; i++) {
 				if (!files[i].isEmpty()) {
-					bookContents = new BookContents(chapter + 1, filenames[i],
-							filesadress.get(chapter), 
-							bookid, userid,
+					bookContents = new BookContents(filenames[i],
+							filesadress.get(chapter), bookid, userid,
 							DateUtil.getDefaultStringDate());
+//					bookContents.setChaptername(filenames[i]);
+//					bookContents.setAdress(filesadress.get(chapter));
+//					bookContents.setBookid(bookid);
+//					bookContents.setUserid(userid);
+//					bookContents.setUpdatetime(DateUtil.getDefaultStringDate());
 					chapter++;
-					
-					bookContentsDao.insert(bookContents);
+
+					bclist.add(bookContents);
 				}
 			}
 		}
-		
+		bookContentsDao.insert(bclist);
 	}
 }
